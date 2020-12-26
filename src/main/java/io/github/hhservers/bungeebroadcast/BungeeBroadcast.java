@@ -39,32 +39,22 @@ public final class BungeeBroadcast extends Plugin {
         configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
         ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuration, file);
 
-
         for (String key : configuration.getSection("broadcast").getKeys()) {
             String message = configuration.getString("broadcast." + key + ".message");
             long interval = configuration.getInt("broadcast." + key + ".interval");
             if (configuration.getString("broadcast." + key + ".url").isEmpty()) {
-                ProxyServer.getInstance().getScheduler().schedule(this, new Runnable() {
-                    public void run() {
-                        new Util().sendBroadcast(message);
-                        getLogger().info("task running");
-                    }
+                ProxyServer.getInstance().getScheduler().schedule(this, () -> {
+                    new Util().sendBroadcast(message);
+                    getLogger().info("task running");
                 }, 1, interval, TimeUnit.MINUTES);
             } else {
                 String url = configuration.getString("broadcast." + key + ".url");
-                ProxyServer.getInstance().getScheduler().schedule(this, new Runnable() {
-                    public void run() {
-                        new Util().sendURLBroadcast(message, url);
-                        getLogger().info("task running");
-                    }
+                ProxyServer.getInstance().getScheduler().schedule(this, () -> {
+                    new Util().sendURLBroadcast(message, url);
+                    getLogger().info("task running");
                 }, 1, interval, TimeUnit.MINUTES);
             }
         }
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
     }
 
     public Configuration getConfiguration() {
