@@ -4,7 +4,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.config.ServerInfo;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class Util {
 
@@ -18,8 +18,8 @@ public class Util {
         TextComponent prefix = getPrefix();
         prefix.addExtra(" ");
         prefix.addExtra(message);
-        for (ServerInfo server : ProxyServer.getInstance().getServersCopy().values()) {
-            server.getPlayers().forEach((proxiedPlayer -> proxiedPlayer.sendMessage(prefix)));
+        for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
+            player.sendMessage(prefix);
         }
     }
 
@@ -35,8 +35,8 @@ public class Util {
         prefix.addExtra(msg);
         prefix.addExtra(" ");
         prefix.addExtra(urlComponent);
-        for (ServerInfo server : ProxyServer.getInstance().getServersCopy().values()) {
-            server.getPlayers().forEach((proxiedPlayer -> proxiedPlayer.sendMessage(prefix)));
+        for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
+            player.sendMessage(prefix);
         }
     }
 

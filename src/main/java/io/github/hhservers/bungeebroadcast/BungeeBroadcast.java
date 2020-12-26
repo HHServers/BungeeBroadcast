@@ -16,6 +16,7 @@ public final class BungeeBroadcast extends Plugin {
     public static BungeeBroadcast plugin;
     private File file;
     private Configuration configuration;
+    private Util util = new Util();
 
 
     @SneakyThrows
@@ -44,18 +45,12 @@ public final class BungeeBroadcast extends Plugin {
             String message = configuration.getString("broadcast." + key + ".message");
             long interval = configuration.getInt("broadcast." + key + ".interval");
             if (configuration.getString("broadcast." + key + ".url").isEmpty()) {
-                ProxyServer.getInstance().getScheduler().schedule(this, new Runnable() {
-                    public void run() {
-                        new Util().sendBroadcast(message);
-                        getLogger().info("task running");
-                    }
-                }, 1, interval, TimeUnit.MINUTES);
+                ProxyServer.getInstance().getScheduler().schedule(this, () -> util.sendBroadcast(message), 1, interval, TimeUnit.MINUTES);
             } else {
                 String url = configuration.getString("broadcast." + key + ".url");
                 ProxyServer.getInstance().getScheduler().schedule(this, new Runnable() {
                     public void run() {
-                        new Util().sendURLBroadcast(message, url);
-                        getLogger().info("task running");
+                        util.sendURLBroadcast(message, url);
                     }
                 }, 1, interval, TimeUnit.MINUTES);
             }
