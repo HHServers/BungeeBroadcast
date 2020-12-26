@@ -48,11 +48,7 @@ public final class BungeeBroadcast extends Plugin {
                 ProxyServer.getInstance().getScheduler().schedule(this, () -> util.sendBroadcast(message), 1, interval, TimeUnit.MINUTES);
             } else {
                 String url = configuration.getString("broadcast." + key + ".url");
-                ProxyServer.getInstance().getScheduler().schedule(this, new Runnable() {
-                    public void run() {
-                        util.sendURLBroadcast(message, url);
-                    }
-                }, 1, interval, TimeUnit.MINUTES);
+                ProxyServer.getInstance().getScheduler().schedule(this, () -> util.sendURLBroadcast(message, url), 1, interval, TimeUnit.MINUTES);
             }
         }
     }
