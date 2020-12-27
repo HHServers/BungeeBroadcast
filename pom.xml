@@ -6,7 +6,7 @@
 
     <groupId>io.github.hhservers</groupId>
     <artifactId>bungeebroadcast</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>BungeeBroadcast</name>

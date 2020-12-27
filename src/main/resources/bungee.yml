@@ -1,3 +1,4 @@
 name: BungeeBroadcast
 version: ${project.version}
 main: io.github.hhservers.bungeebroadcast.BungeeBroadcast
+author: blvxr

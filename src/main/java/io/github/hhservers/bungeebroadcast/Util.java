@@ -24,7 +24,6 @@ public class Util {
     }
 
     public void sendURLBroadcast(String messageString, String url) {
-
         String message = ChatColor.translateAlternateColorCodes('&', messageString);
         TextComponent msg = new TextComponent(message);
         TextComponent urlComponent = new TextComponent(url);
