@@ -25,8 +25,9 @@ public class Util {
 
     public void sendURLBroadcast(String messageString, String url) {
         String message = ChatColor.translateAlternateColorCodes('&', messageString);
+        String urlHolder = ChatColor.translateAlternateColorCodes('&', "&l&8[&r&bClick me&l&8]&r");
         TextComponent msg = new TextComponent(message);
-        TextComponent urlComponent = new TextComponent(url);
+        TextComponent urlComponent = new TextComponent(urlHolder);
         urlComponent.setColor(ChatColor.AQUA);
         urlComponent.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, urlFixer(url)));
         TextComponent prefix = getPrefix();
